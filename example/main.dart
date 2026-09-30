@@ -38,11 +38,11 @@ class GridDemoScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                '1. Safe in Column (Unbounded Height)',
+                '1. Safe in Column (Unbounded Height fallback)',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
-            // Normally crashes in Column, but safe here
+            // Normally crashes in Column, but safely handled with debug indicator
             EzGridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -51,8 +51,7 @@ class GridDemoScreen extends StatelessWidget {
               ),
               itemCount: 6,
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              physics:
-                  const NeverScrollableScrollPhysics(), // Let parent scroll
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => Container(
                 color: Colors.indigo[100 * (index % 9 + 1)],
                 alignment: Alignment.center,
@@ -65,17 +64,18 @@ class GridDemoScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                '2. Safe in Row (Unbounded Width)',
+                '2. Safe in Row (Unbounded Width fallback)',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
-            // Normally crashes in Row, but safe here
+            // Normally crashes in Row, but safely handled
             SizedBox(
               height: 100,
               child: Row(
                 children: [
                   const Text('Start'),
                   EzGridView.builder(
+                    scrollDirection: Axis.horizontal,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
@@ -100,12 +100,66 @@ class GridDemoScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                '3. Correct Usage (Wrapped in Expanded)',
+                '3. Count Constructor (EzGridView.count)',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
             SizedBox(
-              height: 200, // Constrained parent
+              height: 140,
+              child: EzGridView.count(
+                crossAxisCount: 4,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                children: List.generate(
+                  8,
+                  (index) => Container(
+                    color: Colors.purple[100 * (index % 8 + 1)],
+                    alignment: Alignment.center,
+                    child: Text('C-$index'),
+                  ),
+                ),
+              ),
+            ),
+
+            const Divider(height: 32),
+
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                '4. Extent Constructor (EzGridView.extent)',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            SizedBox(
+              height: 140,
+              child: EzGridView.extent(
+                maxCrossAxisExtent: 100,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                children: List.generate(
+                  8,
+                  (index) => Container(
+                    color: Colors.amber[100 * (index % 8 + 1)],
+                    alignment: Alignment.center,
+                    child: Text('E-$index'),
+                  ),
+                ),
+              ),
+            ),
+
+            const Divider(height: 32),
+
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                '5. Correct Usage inside Flex (Wrapped in Expanded)',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            SizedBox(
+              height: 200,
               child: Column(
                 children: [
                   const Text('Header inside constrained column'),

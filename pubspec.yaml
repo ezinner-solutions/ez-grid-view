@@ -1,5 +1,5 @@
 name: ez_grid_view
-description: A crash-safe GridView that automatically handles unbounded height constraints in Columns and Rows.
+description: A defensive, crash-safe drop-in replacement for Flutter's GridView that automatically handles unbounded height and width constraints in Column, Row, and Flex.
 version: 0.0.3
 homepage: https://github.com/Evgenii-Zinner/ez-grid-view
 repository: https://github.com/Evgenii-Zinner/ez-grid-view

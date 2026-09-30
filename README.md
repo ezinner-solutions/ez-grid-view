@@ -4,7 +4,6 @@ A defensive, crash-safe drop-in replacement for Flutter's `GridView` that automa
 
 [![pub package](https://img.shields.io/pub/v/ez_grid_view.svg)](https://pub.dev/packages/ez_grid_view)
 [![likes](https://img.shields.io/pub/likes/ez_grid_view.svg)](https://pub.dev/packages/ez_grid_view)
-[![popularity](https://img.shields.io/pub/popularity/ez_grid_view.svg)](https://pub.dev/packages/ez_grid_view)
 [![pub points](https://img.shields.io/pub/points/ez_grid_view.svg)](https://pub.dev/packages/ez_grid_view)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
